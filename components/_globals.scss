@@ -22,12 +22,12 @@ textarea {
 
 // Links
 a, a:visited {
-    color: $primary-color;
+    color: $primary-link-color;
     -webkit-tap-highlight-color: transparent;
     transition: $transition;
 }
 a:hover, a:focus {
-    color: $secondary-color;
+    color: $secondary-link-color;
 }
 a *, button * {
     pointer-events: none;

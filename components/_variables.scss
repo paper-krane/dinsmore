@@ -23,8 +23,10 @@ $site-bg: #eeeeee !default;
 $font-color: #272625 !default;
 $font-accent-color: #a2907c !default;
 $heading-font-color: #11110f !default;
-$primary-color: #ffb963 !default;
+$primary-color: lighten(#ffb963, 5%) !default;
 $secondary-color: darken($primary-color, 10%) !default;
+$primary-link-color: darken($primary-color, 25%) !default;
+$secondary-link-color: darken($primary-color, 35%) !default;
 
 // Fonts
 $font-stack: 'Roboto', sans-serif !default;
