@@ -1,0 +1,37 @@
+.btn {
+    font-size: 1;
+    letter-spacing: 0;
+    font-weight:inherit;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    min-width: 40px;
+    height: 52px;
+    line-height: 52px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    outline: none;
+	position: relative;
+	z-index: 0;
+    -webkit-tap-highlight-color: transparent;
+	-webkit-backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.btn, .btn:visited {
+    background-color: $primary-color;
+    color: $font-color;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    overflow: hidden;
+	transition: color 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.btn:hover,
+.btn:focus {
+    background-color: $secondary-color;
+    color: $font-color;
+    box-shadow: 0 8px 17px 2px rgba(0,0,0, .07), 0 3px 14px 2px rgba(0,0,0, .06), 0 5px 5px -3px rgba(0,0,0, .1);
+}
