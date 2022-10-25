@@ -19,14 +19,20 @@ $xxl-and-up: "only screen and (min-width : #{$desktop-large-screen-up})" !defaul
 $xxxl-and-up: "only screen and (min-width : #{$desktop-extra-large-screen-up})" !default;
 
 // Colors 
-$site-bg: #eeeeee !default;
-$font-color: #272625 !default;
+$site-bg: #DFE0DC !default;
+$font-color: #031926 !default;
 $font-accent-color: #a2907c !default;
 $heading-font-color: #11110f !default;
-$primary-color: lighten(#ffb963, 5%) !default;
+$primary-color: darken(#ffb963, 5%) !default;
 $secondary-color: darken($primary-color, 10%) !default;
 $primary-link-color: darken($primary-color, 25%) !default;
 $secondary-link-color: darken($primary-color, 35%) !default;
+$orange: #FF981A !default;
+$blue: #2F52E0 !default;
+$grey: #6A706E !default;
+$light-grey: #DFE0DC !default;
+$deep-blue: #031926 !default;
+
 
 // Fonts
 $font-stack: 'Roboto', sans-serif !default;

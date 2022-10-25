@@ -1,0 +1,9 @@
+.dm__container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media #{$xl-and-up} {
+        width: 85%;
+    }
+}
