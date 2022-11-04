@@ -19,11 +19,19 @@
         position: relative;
 
         h1 {
-            font-size: 5.5vw;
+            font-size: 6.5vw;
             text-align: center;
         }
     }
 
+    @media #{$m-and-up} {
+        .dm__container {
+            h1 {
+                font-size: 5.5vw;
+            }
+        }
+    }
+    
     @media #{$l-and-up} {
         .dm__container {
             h1 {

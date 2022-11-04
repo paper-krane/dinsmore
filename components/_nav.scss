@@ -1,4 +1,6 @@
-// NAvbar
+
+
+// Navbar
 #dm__navbar-container {
     position: fixed;
     z-index: 100;
@@ -7,6 +9,42 @@
     width: 100%;
     height: 108px;
     align-items: center;
+
+    &[data-nav-active=true] {
+        #dm__navbar-logo {
+            svg {
+                path, circle, rect {
+                    transition: $transition;
+                    fill: $white !important;
+                }
+            }
+        }
+
+        #dm__navbar {
+            #dm__mobile-nav, #dm__nav-call-to-action {
+                .dm__nav-toggle {
+                    color: $white;
+                    transition: $transition;
+
+                    .dm__nav-toggle-icon {
+                        span {
+                            position: absolute;
+                            transition: $transition;
+                            background-color: $white;
+                            margin: 0 !important;
+                            top: 50% !important;
+                            left: 50% !important;
+                            transform: translate(-50%, -50%) rotate(45deg);
+
+                            &:last-child {
+                                transform: translate(-50%, -50%) rotate(-45deg);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     .dm__container {
         height: 108px;
@@ -21,7 +59,8 @@
             display: block;
             height: 28px;
 
-            path, circle {
+            path, circle, rect {
+                transition: all 0.4s ease .8s;
                 fill: $deep-blue !important;
             }
 
@@ -73,19 +112,23 @@
                 height: 64px;
                 cursor: pointer;
                 margin-left: .5rem;
+                transition: all 0.4s ease 1s;
 
                 .dm__nav-toggle-icon {
                     width: 24px;
                     height: 14px;
                     position: relative;
+                    display: inline-block;
 
                     span {
+                        display: block;
                         width: 100%;
                         height: 2px;
                         background-color: $font-color;
                         position: absolute;
                         top: 0;
                         left: 0;
+                        transition: all 0.4s ease 1s;
 
                         &:nth-child(2) {
                             top: 50%;
@@ -135,12 +178,33 @@
     @media #{$xl-and-up} {
         height: 156px;
 
+        &[data-nav-active=true] {
+            #dm__navbar {
+                #dm__mobile-nav, #dm__nav-call-to-action {
+                    .dm__nav-toggle, .dm__nav-toggle:visited {
+                        .dm__nav-toggle-text {
+                            opacity: 0;
+                            transition: opacity 0.4s ease;
+                        }
+    
+                        .dm__nav-toggle-text.close {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+
         .dm__container {
             height: 156px;
         }
 
         #dm__navbar-logo {
             margin-right: 0;
+
+            svg {
+                height: 32px;
+            }
         }
 
         #dm__navbar {
@@ -263,13 +327,28 @@
                         width: 24px;
                         height: 14px;
                     }
+
+                    .dm__relative {
+                        position: relative;
+                        margin-left: 12px;
+                    }
     
                     .dm__nav-toggle-text {
                         display: block;
-                        margin-left: 12px;
                         text-transform: uppercase;
                         letter-spacing: .1em;
                         font-size: .875rem;
+                        position: relative;
+                        opacity: 1;
+                        transition: opacity 0.4s ease 1s;
+                    }
+
+                    .dm__nav-toggle-text.close {
+                        opacity: 0;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        margin-left: 0;
                     }
                 }
             }
@@ -280,12 +359,165 @@
             }
         }
     }
+
+    @media #{$xxl-and-up} {
+        #dm__navbar-logo {
+            svg {
+                height: 32px;
+            }
+        }
+    }
 }
 
 
 // Offcanvas nav
 #dm__offcanvas-nav-container {
+    z-index: 90;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     display: none;
+    padding-top: 208px;
+    padding-bottom: 108px;
+    overflow-x:hidden;
+    overflow-y: auto;
+
+    .dm__container {
+        min-height: calc(100vh - 316px);
+        position: relative;
+    }
+
+    #dm__offcanvas-nav {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        &> li {
+            overflow: hidden;
+            display: block;
+            padding-right: 2rem;
+        }
+
+        a, a:visited {
+            display: inline-block;
+            font-size: 2rem;
+            color: $white;
+            font-weight: 700;
+            opacity: .5;
+            position: relative;
+        }
+
+        a:hover, a:focus {
+            opacity: 1;
+            transform: translateX(.5rem);
+            color: $orange;
+
+            &:before, &:after {
+                background-color: $orange !important;
+                transform: translate(0, -50%) rotate(90deg) !important;
+            }
+
+            &:after {
+                background-color: $orange !important;
+                transform: translate(0, -50%) rotate(180deg) !important;
+            }
+        }
+
+        .dm__has-children > a {
+            padding-right: 3rem;
+            
+            &:before, &:after {
+                transition: $transition;
+                position: absolute;
+                content: '';
+                top: 50%;
+                right: 0;
+                width: 16px;
+                height: 4px;
+                background-color: $white;
+                transform: translate(0, -50%);
+            }
+
+            &:after {
+                transform: translate(0, -50%) rotate(90deg);
+            }
+        }
+
+        .dm__has-children ul {
+            display: none;
+        }
+    }
+
+    @media #{$m-and-up} {
+        #dm__offcanvas-nav {
+            a, a:visited {
+                font-size: 3rem;
+                line-height: 1.5;
+            }
+        }
+    }
+
+    @media #{$l-and-up} {
+        padding-top: 206px;
+        padding-bottom: 156px;
+
+        .dm__container {
+            min-height: calc(100vh - 362px);
+            display: flex;
+            align-items: center;
+        }
+
+        #dm__offcanvas-nav {
+            a, a:visited {
+                font-size: 4rem;
+                line-height: 1.4;
+            }
+
+            a:hover, a:focus {
+                transform: translateX(1rem);
+            }
+
+            .dm__has-children > a {
+                padding-right: 4rem;
+                
+                &:before, &:after {
+                    width: 24px;
+                    height: 4px;
+                }
+            }
+        }
+    }
+
+    @media #{$xl-and-up} {
+        #dm__offcanvas-nav {
+            a, a:visited {
+                font-size: 6rem;
+            }
+
+            .dm__has-children > a {
+                padding-right: 6rem;
+
+                &:before, &:after {
+                    width: 32px;
+                    height: 6px;
+                }
+            }
+        }
+    }
+}
+
+// Offcanvas Background
+#dm__offcanvas-nav-bg-one, #dm__offcanvas-nav-bg-two {
+    z-index: 80;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: $deep-blue;
+    transform-origin: 100% 0%;
 }
 
 

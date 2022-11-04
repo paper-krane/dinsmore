@@ -104,24 +104,31 @@
 								<a href="#" class="btn cta">Request a Quote</a>
 							</li>
 							<li>
-								<a class="dm__nav-toggle" tabindex="0" aria-label="Toggle main menu" aria-controls="dm__offcanvas-nav">
+								<a class="dm__nav-toggle" tabindex="0" aria-label="Toggle main menu" aria-controls="dm__offcanvas-nav" data-nav-active="false">
 									<span class="dm__nav-toggle-icon">
 										<span></span>
 										<span></span>
 										<span></span>
 									</span>
-									<span class="dm__nav-toggle-text">
-										Menu
-									</span>
+									<div class="dm__relative">
+										<span class="dm__nav-toggle-text">
+											Menu
+										</span>
+										<span class="dm__nav-toggle-text close" aria-hidden="true">
+											Close
+										</span>
+									</div>
 								</a>
 							</li>
 						</ul>
 					</nav>
 				</div>
 			</div>
+			<div id="dm__offcanvas-nav-bg-one" aria-hidden="true"></div>
+			<!-- <div id="dm__offcanvas-nav-bg-two" aria-hidden="true"></div> -->
 			<aside id="dm__offcanvas-nav-container">
 				<nav class="dm__container">
-					<ul id="dm__offcanvass-nav">
+					<ul id="dm__offcanvas-nav">
 						<li class="dm__has-children">
 							<a href="#">Services</a>
 							<ul>
@@ -168,25 +175,41 @@
 		</header>
 		<div id="dm__page-container" asscroll-container>
 			<div id="dm__page">
-				<main id="dm__page-content">
-					<section id="dm__home-banner-container">
-						<div id="dm__home-banner-video-container">
-							
-						</div>
-						<div class="dm__container">
-							<h1>Designing & Prototyping <br>Next Generation Products<span>.</span></h1>
-							<!-- <a class="btn minimal-magnetic">
-								<span>Learn More</span>
-							</a> -->
-						</div>
-					</section>
-					<section id="dm__home-services-container" style="height: 50vh">
+				<div id="dm__page-wrap">
+					<main id="dm__page-content">
+						<section id="dm__home-banner-container">
+							<div id="dm__home-banner-video-container">
+								
+							</div>
+							<div class="dm__container">
+								<h1>Designing & Prototyping <br>Next Generation Products<span>.</span></h1>
+								<!-- <a class="btn minimal-magnetic">
+									<span>Learn More</span>
+								</a> -->
+							</div>
+						</section>
+						<section id="dm__home-introduction-container" style="height: 50vh">
+							<div class="dm__container">
+								<div>
 
-					</section>
-				</main>
-				<footer id="dm__page-footer">
-
-				</footer>
+								</div>
+								<div>
+									<div>
+										<video muted autoplay loop>
+											<source src="./videos/dinsmore_placeholder_H.264.mp4" type="video/mp4">
+										</video>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section id="dm__home-services-container" style="height: 50vh">
+	
+						</section>
+					</main>
+					<footer id="dm__page-footer">
+	
+					</footer>
+				</div>
 			</div>
 		</div>
 		<script type="module" src="/main.js"></script>

@@ -39,11 +39,23 @@ class Dinsmore {
     }
 
 
+    eventHandler(element, eventType, callback) {
+        element.addEventListener(eventType, (e) => {
+            if (e.keyCode === 13 || e.type === "click") {
+                e.preventDefault();
+                e.stopPropagation();
+
+                callback(e);
+            }
+        });
+    }
+
+
     // Scroll smoother
     scrollInit() {
         const asscroll = new ASScroll({
             disableRaf: true,
-            ease: .0625
+            ease: .0625,
         });
 
         gsap.ticker.add(asscroll.update);
@@ -68,6 +80,8 @@ class Dinsmore {
         window.addEventListener("load", () => {
             asscroll.enable();
         });
+
+        return asscroll;
     }
 
 
@@ -78,6 +92,8 @@ class Dinsmore {
 
     navElements() {
         return {
+            page: document.querySelector('#dm__page-wrap'),
+
             navBar: document.querySelector('#dm__navbar-container'),
             navBarLogo: document.querySelector('#dm__navbar-logo'),
             navBarList: document.querySelector('#dm__nav'),
@@ -86,18 +102,101 @@ class Dinsmore {
             navBarSubmenuBackground: document.querySelector('.dm__nav-background'),
             navBarSubmenuBackgroundArrow: document.querySelector('.dm__nav-background .dm__nav-background-arrow'),
             navBarMobileList: document.querySelector('#dm__mobile-nav'),
-            navBarMobileToggle: document.querySelector('#dm__mobile-nav .dm__nav-toggle')
+            navBarToggle: document.querySelector('#dm__mobile-nav .dm__nav-toggle'),
+            
+            // Offcanvas nav
+            offCanvasNav: document.querySelector('#dm__offcanvas-nav-container'),
+            offCanvasNavBg1: document.querySelector('#dm__offcanvas-nav-bg-one'),
+            offCanvasNavBg2: document.querySelector('#dm__offcanvas-nav-bg-two'),
+            offCanvasNavLinks: document.querySelectorAll('#dm__offcanvas-nav > li > a')
         }
     }
 
 
     navToggleHandler() {
+        const _this = this;
+        const {navBarToggle, navBar} = _this.navElements();
+        const {offCanvasNavTl} = _this.navAnimations();
 
+        if (!navBar || !navBarToggle) return;
+
+        const callback = () => {
+            const isActive = navBarToggle.dataset.navActive;
+
+            if (isActive === 'false') {
+                offCanvasNavTl.play();
+
+                navBarToggle.dataset.navActive = 'true';
+
+                navBar.dataset.navActive = 'true';
+            } else {
+                offCanvasNavTl.reverse();
+
+                navBarToggle.dataset.navActive = 'false';
+
+                navBar.dataset.navActive = 'false';
+            }
+        }
+
+        this.eventHandler(navBarToggle, 'click', callback);
+        this.eventHandler(navBarToggle, 'keyup', callback);
+
+        window.addEventListener('resize', (e) => {
+            if (navBarToggle.dataset.navActive === 'true') callback(e);
+        });
     }
 
 
     navAnimations() {
-        
+        const {offCanvasNav, offCanvasNavBg1, offCanvasNavBg2, page, offCanvasNavLinks} = this.navElements();
+        const animObj = {
+            offCanvasNavTl: gsap.timeline({paused: true, reverse: true}),
+
+            duration: .8,
+            easing: CustomEase.create("custom", "M0,0 C0.404,0 0.098,1 1,1 ")
+        }
+
+        gsap.set(offCanvasNav, {
+            opacity: 0,
+            display: 'none'
+        });
+
+        gsap.set([offCanvasNavBg1, offCanvasNavBg2], {
+            scaleX: 0,
+            display: 'none'
+        });
+
+        gsap.set(offCanvasNavLinks, {
+            translateY: `100%`,
+        })
+
+        animObj.offCanvasNavTl.to(page, {
+            translateX: '-10%',
+            filter: 'blur(10px)',
+            duration: animObj.duration,
+            ease: animObj.easing
+        }).to(offCanvasNavBg1, {
+            display: 'block',
+            scaleX: 1,
+            rotate: 0,
+            skewY: 0,
+            duration: animObj.duration,
+            delay: -animObj.duration,
+            ease: animObj.easing
+        }).to(offCanvasNav, {
+            display: 'block',
+            opacity: 1,
+            duration: 0.4,
+            ease: animObj.easing
+        }).to(offCanvasNavLinks, {
+            delay: -.2,
+            translateY: 0,
+            duration: .2,
+            stagger: {from: 'start', each: .15},
+            clearProps: 'transform'
+        })
+
+        return animObj;
     }
 
 
@@ -181,17 +280,18 @@ class Dinsmore {
 
 
     navHeadroomHandler() {
-        const {navBar, navBarMobileToggle, navBarList} = this.navElements();
+        const {navBar, navBarToggle, navBarList} = this.navElements();
 
-        if (!navBar || !navBarMobileToggle || !navBarList) return;
+        if (!navBar || !navBarToggle || !navBarList) return;
 
         this.navHeadroomAnimations();
     }
 
 
     navHeadroomAnimations() {
-        const _ = this;
-        const {navBarMobileList, navBarCta, navBarList} = this.navElements();
+        const _this = this;
+        const {navBarMobileList, navBarCta, navBarList, navBarToggle, navBar} = this.navElements();
+        const {offCanvasNavTl} = _this.navAnimations();
         const animationObj = {
             navListTL: gsap.timeline({paused: true, reversed: true}),
 
@@ -226,7 +326,11 @@ class Dinsmore {
                 start: `top -156`,
                 end: 99999,
                 onUpdate: (self) => {
-                    self.isActive ? animationObj.navListTL.play() : animationObj.navListTL.reverse();
+                    if (self.isActive) {
+                        animationObj.navListTL.play()
+                    } else {
+                        animationObj.navListTL.reverse();
+                    }
                 }
             });
         });

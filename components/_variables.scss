@@ -31,7 +31,9 @@ $orange: #FF981A !default;
 $blue: #2F52E0 !default;
 $grey: #6A706E !default;
 $light-grey: #DFE0DC !default;
-$deep-blue: #031926 !default;
+$deep-blue: desaturate(#031926, 50%) !default;
+$white: #ffffff;
+$black: #000000;
 
 
 // Fonts
