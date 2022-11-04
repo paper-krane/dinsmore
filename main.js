@@ -108,6 +108,7 @@ class Dinsmore {
             offCanvasNav: document.querySelector('#dm__offcanvas-nav-container'),
             offCanvasNavBg1: document.querySelector('#dm__offcanvas-nav-bg-one'),
             offCanvasNavBg2: document.querySelector('#dm__offcanvas-nav-bg-two'),
+            offCanvasNavLi: document.querySelectorAll('#dm__offcanvas-nav > li'),
             offCanvasNavLinks: document.querySelectorAll('#dm__offcanvas-nav > li > a')
         }
     }
@@ -148,7 +149,7 @@ class Dinsmore {
 
 
     navAnimations() {
-        const {offCanvasNav, offCanvasNavBg1, offCanvasNavBg2, page, offCanvasNavLinks} = this.navElements();
+        const {offCanvasNav, offCanvasNavBg1, offCanvasNavBg2, page, offCanvasNavLinks, offCanvasNavLi} = this.navElements();
         const animObj = {
             offCanvasNavTl: gsap.timeline({paused: true, reverse: true}),
 
@@ -172,9 +173,15 @@ class Dinsmore {
 
         animObj.offCanvasNavTl.to(page, {
             translateX: '-10%',
-            filter: 'blur(10px)',
+            scale: .95,
+            filter: 'blur(20px)',
             duration: animObj.duration,
-            ease: animObj.easing
+            ease: animObj.easing,
+            onStart: () => {
+                gsap.set(offCanvasNavLi, {
+                    clearProps: 'all'
+                })
+            }
         }).to(offCanvasNavBg1, {
             display: 'block',
             scaleX: 1,
@@ -186,7 +193,7 @@ class Dinsmore {
         }).to(offCanvasNav, {
             display: 'block',
             opacity: 1,
-            duration: 0.4,
+            duration: 0.3,
             ease: animObj.easing
         }).to(offCanvasNavLinks, {
             delay: -.2,
@@ -197,6 +204,16 @@ class Dinsmore {
         })
 
         return animObj;
+    }
+
+    
+    offCanvasNavSubmenuToggle() {
+
+    }
+
+
+    offCanvasNavSubmenuAnimations() {
+        
     }
 
 
