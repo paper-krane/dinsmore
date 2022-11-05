@@ -16,6 +16,8 @@ class Dinsmore {
 
         this.scrollInit();
         this.navToggleHandler();
+        this.offCanvasNavSubmenuToggle();
+        this.offCanvasNavSubmenuBack();
         this.navDropdownHandler();
         this.navHeadroomHandler();
         this.homeHeroInit();
@@ -109,7 +111,9 @@ class Dinsmore {
             offCanvasNavBg1: document.querySelector('#dm__offcanvas-nav-bg-one'),
             offCanvasNavBg2: document.querySelector('#dm__offcanvas-nav-bg-two'),
             offCanvasNavLi: document.querySelectorAll('#dm__offcanvas-nav > li'),
-            offCanvasNavLinks: document.querySelectorAll('#dm__offcanvas-nav > li > a')
+            offCanvasNavLinks: document.querySelectorAll('#dm__offcanvas-nav > li > a > span'),
+            subnavToggleLI: document.querySelectorAll('#dm__offcanvas-nav li.dm__has-children'),
+            subnavToggleNavBack: document.querySelectorAll('#dm__offcanvas-nav li.dm__has-children .dm__nav-back')
         }
     }
 
@@ -198,7 +202,7 @@ class Dinsmore {
         }).to(offCanvasNavLinks, {
             delay: -.2,
             translateY: 0,
-            duration: .2,
+            duration: .4,
             stagger: {from: 'start', each: .15},
             clearProps: 'transform'
         })
@@ -208,12 +212,105 @@ class Dinsmore {
 
     
     offCanvasNavSubmenuToggle() {
+        const _this = this;
+        const {subnavToggleLI, subnavToggleNavBack} = this.navElements();
 
+        if (subnavToggleLI.length < 1) return;
+
+        const callback = (e) => {
+            _this.offCanvasNavSubmenuAnimations(e.target);
+        }
+
+
+        for (let subnavToggle of subnavToggleLI) {
+            _this.eventHandler(subnavToggle.querySelector('a'), 'click', callback);
+            _this.eventHandler(subnavToggle.querySelector('a'), 'keyup', callback);
+        }
     }
 
 
-    offCanvasNavSubmenuAnimations() {
-        
+    offCanvasNavSubmenuBack() {
+        const _this = this;
+        const {subnavToggleNavBack} = this.navElements();
+
+        if (subnavToggleNavBack.length < 1) return;
+
+        const callback = (e) => {
+            _this.offCanvasNavSubmenuBackAnimations(e.target.parentElement.parentElement.previousElementSibling);
+        }
+
+        for (let navBack of subnavToggleNavBack) {
+            _this.eventHandler(navBack, 'click', callback);
+        }
+    }
+
+
+    offCanvasNavSubmenuAnimations(link) {
+        const parentUL = link.parentElement.parentElement;
+        const parentLI = link.parentElement;
+        const siblingUL = link.nextElementSibling;
+        const tl = gsap.timeline({paused: true});
+        const duration = .4;
+        const easing = CustomEase.create("custom", "M0,0 C0.404,0 0.098,1 1,1 ");
+
+        tl.to(parentUL.querySelectorAll(':scope > li > a'), {
+            duration: duration,
+            opacity: 0,
+            ease: easing
+        }).to(parentUL, {
+            delay: -duration,
+            scale: 1.1,
+            pointerEvents: 'none',
+            duration: duration,
+            ease: easing
+        }).to(siblingUL, {
+            delay: -duration,
+            duration: duration,
+            display: 'block',
+            opacity: 1,
+            scale: .9,
+            pointerEvents: 'auto'
+        });
+
+        tl.play();
+    }
+
+
+    offCanvasNavSubmenuBackAnimations(link) {
+        const parentUL = link.parentElement.parentElement;
+        const parentLI = link.parentElement;
+        const siblingUL = link.nextElementSibling;
+        const tl = gsap.timeline({reversed: true, paused: true});
+        const duration = .4;
+        const easing = CustomEase.create("custom", "M0,0 C0.404,0 0.098,1 1,1 ");
+
+        console.log(siblingUL);
+
+        tl.to(siblingUL, {
+            duration: duration,
+            display: 'none',
+            opacity: 0,
+            scale: .8,
+            pointerEvents: 'none'
+        }).to(parentUL.querySelectorAll(':scope > li > a'), {
+            delay: -duration,
+            duration: duration,
+            opacity: 1,
+            ease: easing
+        }).to(parentUL, {
+            delay: -duration,
+            scale: 1,
+            pointerEvents: 'auto',
+            duration: duration,
+            ease: easing
+        });
+
+        tl.play();
+    }
+
+
+    clearOffCanvasSubmenuAnimations() {
+
     }
 
 
