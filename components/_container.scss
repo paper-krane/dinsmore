@@ -3,6 +3,10 @@
     margin-left: auto;
     margin-right: auto;
 
+    &.xl {
+        max-width: 1400px;
+    }
+
     @media #{$xl-and-up} {
         width: 85%;
     }
