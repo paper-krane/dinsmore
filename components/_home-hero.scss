@@ -1,45 +1,62 @@
 #dm__home-banner-container {
     position: relative;
-    overflow: hidden;
     color: $white;
     background-color: $deep-blue;
 
-    #dm__home-banner-image-container {
+    #dm__home-banner-media-container {
         position: absolute;
-        top: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+
+        #dm__home-banner-image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 400px);
+            overflow: hidden;
+    
+            img {
+                object-fit: cover;
+                object-position: center;
+                min-width: 100%;
+                min-height: 100%;
+                display: block;
+            }
+    
+            &:before {
+                z-index: 10;
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 40%;
+                background: transparent;
+                background: linear-gradient(180deg, rgba($deep-blue,.8) 0%, rgba(0,0,0,0) 100%);
+            }
+    
+            &:after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba($black, .4);
+            }
+        }
+    }
+
+    .dm__bg-shape {
+        position: absolute;
+        bottom: -2px;
         left: 0;
         width: 100%;
-        height: calc(100% + 400px);
-        overflow: hidden;
 
-        img {
-            object-fit: cover;
-            object-position: center;
-            min-width: 100%;
-            min-height: 100%;
+        svg {
             display: block;
-        }
-
-        &:before {
-            z-index: 10;
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background: transparent;
-            background: linear-gradient(180deg, rgba($deep-blue,.8) 0%, rgba(0,0,0,0) 100%);
-        }
-
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba($black, .4);
         }
     }
 
@@ -62,6 +79,7 @@
 
             .dm__m-top-auto {
                 margin-top: auto;
+                margin-bottom: 2rem;
             }
 
             h1 {
@@ -113,7 +131,7 @@
         .dm__container {
     
             .dm__content-1 {
-                min-height: 1024px;
+                min-height: 100vh;
     
                 h1 {
                     font-size: 14vw;
@@ -135,7 +153,6 @@
 
     @media #{$xl-and-up} {
         .dm__container {
-    
             .dm__content-1 {
                 padding-top: 0;
                 font-size: 1.4rem;
@@ -143,6 +160,7 @@
                 .dm__m-top-auto {
                     padding-top: 30vw;
                     margin-top: 0;
+                    margin-bottom: 3rem;
                 }
     
                 h1 {
@@ -162,19 +180,18 @@
                     left: 0;
                     width: 100%;
                     height: 100vh;
-                    opacity: .5;
+                    opacity: .7;
 
                     .icon {
                         display: none;
                     }
 
                     .text {
-                        font-size: 1.25rem;
+                        font-size: 1.4rem;
                         display: block;
                         font-weight: 400;
-                        text-transform: lowercase;
                         position: absolute;
-                        bottom: 2rem;
+                        bottom: 3rem;
                         right: 0;
                     }
                 }
@@ -184,6 +201,24 @@
                 font-size:1.4rem;
                 margin-top: 5rem;
                 padding-bottom: 30vw;
+            }
+        }
+    }
+
+    @media #{$xxl-and-up} {
+        .dm__container {
+            .dm__content-1 {
+                padding-top: 0;
+                font-size: 1.6rem;
+
+                .dm__m-top-auto {
+                    padding-top: 24vw;
+                }
+            }
+    
+            .dm__content-2 {
+                font-size:1.6rem;
+                padding-bottom: 24vw;
             }
         }
     }

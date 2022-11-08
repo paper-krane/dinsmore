@@ -74,16 +74,68 @@ class Dinsmore {
                 return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
             }
         });
-        
+
+        // App colors
+        const _this = this;
+        const actions = document.querySelector('#dm__navbar-container');
+        const light = document.querySelectorAll('.light');
+        let lightMode = [];
+
+        for (let lightEl of light) {
+            const elFromTop = lightEl.offsetTop;
+            const elHeight = lightEl.offsetHeight;
+            const darkStart = elFromTop;
+            const darkEnd = elFromTop + elHeight;
+
+            lightMode.push({
+               start: darkStart,
+               end: darkEnd 
+            })
+        }
+
+        console.log(lightMode);
+
+        window.addEventListener('resize', () => {
+            lightMode = [];
+
+            for (let lightEl of light) {
+                const elFromTop = lightEl.offsetTop;
+                const elHeight = lightEl.offsetHeight;
+                const darkStart = elFromTop;
+                const darkEnd = elFromTop + elHeight;
+    
+                lightMode.push({
+                   start: darkStart,
+                   end: darkEnd 
+                })
+            }
+        });
+
+
+        // init asscroll
         asscroll.on("update", ScrollTrigger.update);
+        asscroll.on('scroll', (scrollPos) => {
+            let changeArray = [];
+            for (let i = 0; i < lightMode.length; i++) {
+                if (scrollPos >= lightMode[i].start && scrollPos <= lightMode[i].end) {
+                    changeArray.push(true);
+                } else {
+                    changeArray.push(false);
+                }
+            }
+
+            if (changeArray.includes(true)) {
+                actions.classList.add('is-dark');
+            } else {
+                actions.classList.remove('is-dark');
+            }
+        })
 
         ScrollTrigger.addEventListener("refresh", asscroll.resize);
 
         window.addEventListener("load", () => {
             asscroll.enable();
         });
-
-        return asscroll;
     }
 
 
@@ -284,8 +336,6 @@ class Dinsmore {
         const duration = .4;
         const easing = CustomEase.create("custom", "M0,0 C0.404,0 0.098,1 1,1 ");
 
-        console.log(siblingUL);
-
         tl.to(siblingUL, {
             duration: duration,
             display: 'none',
@@ -465,7 +515,7 @@ class Dinsmore {
         gsap.to(parallaxBG, {
             translateY: '-400px',
             scale: 1.2,
-            opacity: .7,
+            opacity: .8,
             scrollTrigger: {
                 trigger: heroBanner,
                 scrub: 2

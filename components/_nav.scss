@@ -9,6 +9,40 @@
     width: 100%;
     height: 108px;
     align-items: center;
+    pointer-events: none;
+
+    &.is-dark {
+        #dm__navbar-logo {
+            svg {
+                path, circle, rect {
+                    fill: $font-color !important;
+                }
+            }
+        }
+        #dm__navbar {
+            #dm__mobile-nav, #dm__nav-call-to-action {
+                .btn, .btn:visited {
+                    background-color: $deep-blue;
+                    color: $white;
+                }
+
+                .btn:hover, .btn:focus {
+                    background-color: $orange;
+                    color: $font-color;
+                }
+                
+                .dm__nav-toggle {
+                    color: $font-color; 
+
+                    .dm__nav-toggle-icon {
+                        span {
+                            background-color: $font-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     &[data-nav-active=true] {
         #dm__navbar-logo {
@@ -22,15 +56,25 @@
 
         #dm__navbar {
             #dm__mobile-nav, #dm__nav-call-to-action {
+                .btn, .btn:visited {
+                    background-color: lighten($site-bg, 5%);
+                    color: $font-color;
+                }
+
+                .btn:hover, .btn:focus {
+                    background-color: $orange;
+                    color: $font-color;
+                }
+
                 .dm__nav-toggle {
-                    color: $white;
+                    color: $white !important;
                     transition: $transition;
 
                     .dm__nav-toggle-icon {
                         span {
                             position: absolute;
                             transition: $transition;
-                            background-color: $white;
+                            background-color: $white !important;
                             margin: 0 !important;
                             top: 50% !important;
                             left: 50% !important;
@@ -54,13 +98,14 @@
 
     #dm__navbar-logo {
         margin-right: auto; 
+        pointer-events: auto;
         
         svg {
             display: block;
             height: 28px;
 
             path, circle, rect {
-                transition: all 0.4s ease .8s;
+                transition: all 0.4s ease 0s;
                 fill: $white !important;
             }
 
@@ -75,6 +120,7 @@
         margin-left: auto;
 
         #dm__nav {
+            pointer-events: auto;
             display: none;
             list-style: none;
             padding: 0;
@@ -89,6 +135,8 @@
             align-items: center;
 
             .btn, .btn:visited {
+                pointer-events: auto;
+                mix-blend-mode: normal;
                 display: block;
                 height: 42px;
                 line-height: 42px;
@@ -104,6 +152,7 @@
             }
             
             .dm__nav-toggle {
+                pointer-events: auto;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -112,7 +161,7 @@
                 height: 64px;
                 cursor: pointer;
                 margin-left: .5rem;
-                transition: all 0.4s ease 1s;
+                transition: all 0.4s ease 0s;
 
                 .dm__nav-toggle-icon {
                     width: 24px;
@@ -128,7 +177,7 @@
                         position: absolute;
                         top: 0;
                         left: 0;
-                        transition: all 0.4s ease 1s;
+                        transition: all 0.4s ease 0s;
 
                         &:nth-child(2) {
                             top: 50%;

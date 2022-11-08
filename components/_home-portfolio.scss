@@ -1,0 +1,64 @@
+#dm__home-portfolio-container {
+    background-color: $blue;
+    color: $white;
+    position: relative;
+    padding-top: 30vw;
+    padding-bottom: 16vw;
+
+    .dm__bg-shape {
+        position: absolute;
+        top: -2px;
+        left: 0;
+        width: 100%;
+        
+        svg {
+            display: block;
+        }
+    }
+
+    .dm__container {
+        position: relative;
+    }
+
+    h3 {
+        display: inline-block;
+        font-size: 14vw;
+        position: relative;
+        margin-bottom: 5rem;
+        line-height: 1.1;
+        padding-top: 1rem;
+
+        &:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 1px;
+            width: 38.2%;
+            background-color: $white;
+        }
+    }
+
+    @media #{$xl-and-up} {
+        padding-top: 24vw;
+        padding-bottom: 12vw;
+
+        .dm__home-portfolio-header {
+            text-align: center;
+
+            h3 {
+                font-size: 10vw;
+            }
+        }
+    }
+
+    @media #{$xxl-and-up} {
+        padding-bottom: 10vw;
+
+        .dm__home-services-header {
+            h3 {
+                font-size: 12rem;
+            }
+        }
+    }
+}

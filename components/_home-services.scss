@@ -1,0 +1,55 @@
+#dm__home-services-container {
+    padding-top: 16vw;
+    padding-bottom: 16vw;
+
+    .dm__container {
+        max-width: 1400px;
+    }
+
+    .dm__service {
+        font-size: 1.1rem;
+    }
+
+    h2 {
+        display: inline-block;
+        font-size: 16vw;
+        position: relative;
+        margin-bottom: 5rem;
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            width: 38.2%;
+            background-color: $font-color;
+        }
+    }
+
+    @media #{$xl-and-up} {
+        padding-top: 12vw;
+        padding-bottom: 12vw;
+
+        .dm__home-services-header {
+            text-align: right;
+
+            h2 {
+                font-size: 12vw;
+            }
+        }
+    }
+
+    @media #{$xxl-and-up} {
+        padding-top: 10vw;
+        padding-bottom: 10vw;
+
+        .dm__home-services-header {
+            text-align: right;
+            
+            h2 {
+                font-size: 12rem;
+            }
+        }
+    }
+}
