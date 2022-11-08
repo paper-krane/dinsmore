@@ -1,58 +1,189 @@
 #dm__home-banner-container {
-    height: 100vh;
-    min-height: 520px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     position: relative;
+    overflow: hidden;
+    color: $white;
+    background-color: $deep-blue;
 
-    #dm__home-banner-video-container {
+    #dm__home-banner-image-container {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: calc(100% + 96px);
+        height: calc(100% + 400px);
+        overflow: hidden;
+
+        img {
+            object-fit: cover;
+            object-position: center;
+            min-width: 100%;
+            min-height: 100%;
+            display: block;
+        }
+
+        &:before {
+            z-index: 10;
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: transparent;
+            background: linear-gradient(180deg, rgba($deep-blue,.8) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($black, .4);
+        }
     }
 
     .dm__container {
         position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
 
-        h1 {
-            font-size: 6.5vw;
-            text-align: center;
+        .dm__content-1 {
+            width: 100%;
+            flex: 0 0 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+            padding-top: 208px; 
+            padding-bottom: 2rem; 
+            font-size: 1.25rem;
+
+            .dm__m-top-auto {
+                margin-top: auto;
+            }
+
+            h1 {
+                font-size: 16vw;
+                line-height: 1.1;
+
+                br {
+                    display: none;
+                }
+            }
+
+            .dm__scroll-icon {
+                display: inline-block;
+                padding-top: 2rem;
+
+                .icon {
+                    svg {
+                        width: 20px;
+                        height: 22px;
+                        transform: rotate(90deg);
+
+                        path {
+                            fill: $white !important;
+                        }
+                    }
+                }
+
+                .text {
+                    display: none;
+                }
+            }
+        }
+
+        .dm__content-2 {
+            padding-bottom: 208px;
+            font-size: 1.25rem;
+
+            br {
+                display: none;
+            }
         }
     }
 
     @media #{$m-and-up} {
-        .dm__container {
-            h1 {
-                font-size: 5.5vw;
-            }
-        }
+        
     }
-    
+
     @media #{$l-and-up} {
         .dm__container {
-            h1 {
-                font-size: 4.5vw;
+    
+            .dm__content-1 {
+                min-height: 1024px;
+    
+                h1 {
+                    font-size: 14vw;
+                    line-height: 1.1;
+    
+                    br {
+                        display: inline;
+                    }
+                }
+            }
+    
+            .dm__content-2 {
+                br {
+                    display: inline;
+                }
             }
         }
     }
 
     @media #{$xl-and-up} {
         .dm__container {
-            h1 {
-                font-size: 4vw;
-            }
-        }
-    }
     
-    @media #{$xxl-and-up} {
-        .dm__container {
-            h1 {
-                font-size: 4rem;
-                transition: $transition;
+            .dm__content-1 {
+                padding-top: 0;
+                font-size: 1.4rem;
+
+                .dm__m-top-auto {
+                    padding-top: 30vw;
+                    margin-top: 0;
+                }
+    
+                h1 {
+                    font-size: 14vw;
+                    line-height: 1.1;
+    
+                    br {
+                        display: inline;
+                    }
+                }
+
+                .dm__scroll-icon {
+                    pointer-events: none;
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100vh;
+                    opacity: .5;
+
+                    .icon {
+                        display: none;
+                    }
+
+                    .text {
+                        font-size: 1.25rem;
+                        display: block;
+                        font-weight: 400;
+                        text-transform: lowercase;
+                        position: absolute;
+                        bottom: 2rem;
+                        right: 0;
+                    }
+                }
+            }
+    
+            .dm__content-2 {
+                font-size:1.4rem;
+                margin-top: 5rem;
+                padding-bottom: 30vw;
             }
         }
     }

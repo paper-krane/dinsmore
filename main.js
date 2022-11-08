@@ -20,7 +20,7 @@ class Dinsmore {
         this.offCanvasNavSubmenuBack();
         this.navDropdownHandler();
         this.navHeadroomHandler();
-        this.homeHeroInit();
+        this.homeHeroParallax();
     }
 
 
@@ -453,13 +453,37 @@ class Dinsmore {
     }
 
     
-    magneticButton() {
+    homeHeroParallax() {
+        const heroBanner = document.querySelector('#dm__home-banner-container');
+        const parallaxBG = document.querySelector('#dm__home-banner-image-container');
+        const scrollIcon = document.querySelector('.dm__scroll-icon');
+        const scrollIconText = document.querySelector('.dm__scroll-icon .text');
+        const mediaQuery = gsap.matchMedia();
 
-    }
+        if (!heroBanner || !parallaxBG) return;
 
+        gsap.to(parallaxBG, {
+            translateY: '-400px',
+            scale: 1.2,
+            opacity: .7,
+            scrollTrigger: {
+                trigger: heroBanner,
+                scrub: 2
+            }
+        });
 
-    homeHeroInit() {
-        
+        mediaQuery.add('(min-width: 1280px)', () => {
+            gsap.to(scrollIconText, {
+                opacity: 0,
+                filter: 'blur(10px)',
+                scrollTrigger: {
+                    trigger: scrollIcon,
+                    scrub: 2,
+                    start: '10% top',
+                    end: 'bottom center'
+                }
+            });
+        });
     }
 }
 
