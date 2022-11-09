@@ -666,7 +666,7 @@ class Dinsmore {
         });
 
         const animation2 = gsap.to(img2, {
-            translateY: '-20%',
+            translateY: '-16%',
             scrollTrigger: {
                 trigger: img2,
                 scrub: 1

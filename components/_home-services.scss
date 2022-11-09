@@ -15,7 +15,7 @@
         left: 0;
         border-radius: 50%;
         backdrop-filter: blur(6px);
-        background-color: rgba(darken($site-bg, 10%), .3);
+        background-color: rgba($orange, .3);
         overflow: hidden;
         opacity: 0;
 
@@ -38,7 +38,7 @@
 
     .dm__container {
         position: relative;
-        max-width: 1400px;
+        max-width: 1200px;
         z-index: 1;
     }
 
@@ -47,7 +47,7 @@
         font-size: 1.1rem;
         margin-bottom: 5rem;
         position: relative;
-        max-width: 1000px;
+        max-width: 800px;
         color: $font-color;
         transition: $transition;
 
@@ -69,6 +69,10 @@
 
         h3 {
             transition: $transition;
+
+            .dm__description {
+                font-size: 1.25rem;
+            }
 
             .text-small {
                 font-size: .875rem;
@@ -125,6 +129,10 @@
                 h3 {
                     margin-bottom: 0;
                     line-height: 1;
+
+                    .dm__description {
+                        font-size: 1.5rem;
+                    }
                 }
 
                 .dm__service-ghost-letter {
@@ -182,25 +190,26 @@
         .dm__services-media {
             display: block;
             position: absolute;
-            top: 10%;
-            right: 2%;
+            top: 12%;
+            right: 7.5%;
             width: 28%;
             z-index: 1;
             overflow: hidden;
             border-radius: 20px;
 
             &.container-2 {
-                width: 20%;
+                width: 22%;
                 top: auto;
-                bottom: 0%;
-                left: 2%;
+                bottom: -2%;
+                left: 7.5%;
                 right: auto;
             }
 
             .dm__services-media-ratio {
                 height: 0;
                 width: 100%;
-                padding-bottom: 140%;
+                padding-bottom: 160%;
+                border-radius: 20px;
                 overflow: hidden;
             }
 
@@ -210,7 +219,7 @@
                 top: 0;
                 left: 0;
                 width: 100%;
-                height: 110%;
+                height: 120%;
                 overflow: hidden;
 
                 image {
@@ -234,6 +243,34 @@
         .dm__service {
             font-size: 1.1rem;
             margin-bottom: 8rem;
+
+            &.service-2 {
+                margin-left: 0;
+            }
+
+            &.service-3 {
+                margin-left: 400px;
+            }
+
+            &.service-4 {
+                margin-left: 400px;
+            }
+        }
+    }
+
+    @media only screen and (min-width: 2000px) {
+        .dm__services-media {
+            top: 10%;
+            right: 7.5%;
+            width: 28%;
+
+            &.container-2 {
+                width: 24%;
+                top: auto;
+                bottom: -7.5%;
+                left: 7.5%;
+                right: auto;
+            }
         }
     }
 }
