@@ -14,13 +14,16 @@ class Dinsmore {
     init() {
         console.log('Initializing Dinsmore...');
 
-        this.scrollInit();
+        // this.scrollInit();
+        this.scrollWatch();
         this.navToggleHandler();
         this.offCanvasNavSubmenuToggle();
         this.offCanvasNavSubmenuBack();
         this.navDropdownHandler();
         this.navHeadroomHandler();
         this.homeHeroParallax();
+        this.homeServicesHandler();
+        this.homeServicesParallax();
     }
 
 
@@ -47,6 +50,8 @@ class Dinsmore {
                 e.preventDefault();
                 e.stopPropagation();
 
+                callback(e);
+            } else {
                 callback(e);
             }
         });
@@ -93,8 +98,6 @@ class Dinsmore {
             })
         }
 
-        console.log(lightMode);
-
         window.addEventListener('resize', () => {
             lightMode = [];
 
@@ -139,8 +142,58 @@ class Dinsmore {
     }
 
 
-    scrollDestroy() {
+    scrollWatch() {
+        const _this = this;
+        const actions = document.querySelector('#dm__navbar-container');
+        const light = document.querySelectorAll('.light');
+        let lightMode = [];
 
+        for (let lightEl of light) {
+            const elFromTop = lightEl.offsetTop;
+            const elHeight = lightEl.offsetHeight;
+            const darkStart = elFromTop;
+            const darkEnd = elFromTop + elHeight;
+
+            lightMode.push({
+               start: darkStart,
+               end: darkEnd 
+            })
+        }
+
+        window.addEventListener('resize', () => {
+            lightMode = [];
+
+            for (let lightEl of light) {
+                const elFromTop = lightEl.offsetTop;
+                const elHeight = lightEl.offsetHeight;
+                const darkStart = elFromTop;
+                const darkEnd = elFromTop + elHeight;
+    
+                lightMode.push({
+                   start: darkStart,
+                   end: darkEnd 
+                })
+            }
+        });
+
+        window.addEventListener('scroll', (e) => {
+            const scrollPos = window.scrollY;
+            let changeArray = [];
+
+            for (let i = 0; i < lightMode.length; i++) {
+                if (scrollPos >= lightMode[i].start && scrollPos <= lightMode[i].end) {
+                    changeArray.push(true);
+                } else {
+                    changeArray.push(false);
+                }
+            }
+
+            if (changeArray.includes(true)) {
+                actions.classList.add('is-dark');
+            } else {
+                actions.classList.remove('is-dark');
+            }
+        });
     }
 
 
@@ -186,12 +239,16 @@ class Dinsmore {
                 navBarToggle.dataset.navActive = 'true';
 
                 navBar.dataset.navActive = 'true';
+
+                _this.windowDisableScroll();
             } else {
                 offCanvasNavTl.reverse();
 
                 navBarToggle.dataset.navActive = 'false';
 
                 navBar.dataset.navActive = 'false';
+
+                _this.windowEnableScroll();
             }
         }
 
@@ -533,6 +590,95 @@ class Dinsmore {
                     end: 'bottom center'
                 }
             });
+        });
+    }
+
+
+    homeServicesHandler() {
+        const _this = this;
+        const servicesSection = document.querySelector('#dm__home-services-container');
+        const serviceImages = document.querySelector('#dm__services-hover-container');
+        const services = document.querySelectorAll('.dm__service');
+        const img1 = document.querySelector('.dm__services-media');
+        const img2 = document.querySelector('.dm__services-media.container-2');
+
+        if (services.length < 1) return;
+
+        const callbackIn = (e) => {
+            gsap.to(serviceImages, {
+                opacity: 1,
+                duration: .4
+            });
+            gsap.to([img1, img2], {
+                opacity: .7,
+                filter: 'blur(5px)',
+                duration: .4
+            });
+        }
+
+        const callbackOut = (e) => {
+            gsap.to(serviceImages, {
+                opacity: 0,
+                duration: .4
+            });
+            gsap.to([img1, img2], {
+                opacity: 1,
+                filter: 'blur(0px)',
+                duration: .4
+            });
+        }
+
+        _this.eventHandler(servicesSection, 'mousemove', (e) => {
+            gsap.to(serviceImages, {
+                left: e.clientX,
+                top: e.clientY,
+                duration: .4
+            });
+        });
+
+        for (let service of services) {
+            _this.eventHandler(service, 'mouseover', callbackIn);
+            _this.eventHandler(service, 'mouseleave', callbackOut);
+        }
+    }
+
+    
+    homeServicesParallax() {
+        const img1 = document.querySelector('.dm__services-media');
+        const img1Inner = document.querySelector('.dm__services-media figure');
+        const img2 = document.querySelector('.dm__services-media.container-2');
+        const img2Inner = document.querySelector('.dm__services-media.container-2 figure');
+
+        const animation1 = gsap.to(img1, {
+            translateY: '-10%',
+            scrollTrigger: {
+                trigger: img1,
+                scrub: 1
+            }
+        });
+
+        const animation1Inner = gsap.to(img1Inner, {
+            translateY: '-5%',
+            scrollTrigger: {
+                trigger: img1,
+                scrub: 1
+            }
+        });
+
+        const animation2 = gsap.to(img2, {
+            translateY: '-20%',
+            scrollTrigger: {
+                trigger: img2,
+                scrub: 1
+            }
+        });
+
+        const animation2Inner = gsap.to(img2Inner, {
+            translateY: '-5%',
+            scrollTrigger: {
+                trigger: img2,
+                scrub: 1
+            }
         });
     }
 }

@@ -1,9 +1,45 @@
 #dm__home-services-container {
     padding-top: 16vw;
     padding-bottom: 16vw;
+    position: relative;
+
+    .dm__services-media {
+        display: none;
+    }
+
+    #dm__services-hover-container {
+        pointer-events: none;
+        z-index: 2;
+        position: fixed;
+        top: 0;
+        left: 0;
+        border-radius: 50%;
+        backdrop-filter: blur(6px);
+        background-color: rgba(darken($site-bg, 10%), .3);
+        overflow: hidden;
+        opacity: 0;
+
+        #dm__services-ratio-container {
+            width: 108px;
+            height: 108px;
+        }
+
+        .learn-more {
+            display: block;
+            white-space: nowrap;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: $heading-font-stack;
+            font-size: 1rem;
+        }
+    }
 
     .dm__container {
+        position: relative;
         max-width: 1400px;
+        z-index: 1;
     }
 
     .dm__service, .dm__service:visited {
@@ -13,6 +49,7 @@
         position: relative;
         max-width: 1000px;
         color: $font-color;
+        transition: $transition;
 
         &:last-child {
             margin-bottom: 0;
@@ -28,6 +65,23 @@
             color: transparent;
             -webkit-text-stroke-width: 2px;
             -webkit-text-stroke-color: $font-color;
+        }
+
+        h3 {
+            transition: $transition;
+
+            .text-small {
+                font-size: .875rem;
+                vertical-align: top;
+            }
+        }
+    }
+
+    .dm__service:hover, .dm__service:focus {
+        transform: scale(1.05);
+
+        h3 {
+            color: $orange;
         }
     }
 
@@ -80,7 +134,7 @@
                     position: absolute;
                     left: auto;
                     right: calc(100% + .5rem);
-                    top: 0;
+                    top: .5rem;
                     opacity: .5;
                     color: $font-color;
                     -webkit-text-stroke-width: 0;
@@ -124,6 +178,50 @@
     @media #{$xxl-and-up} {
         padding-top: 10vw;
         padding-bottom: 10vw;
+
+        .dm__services-media {
+            display: block;
+            position: absolute;
+            top: 10%;
+            right: 4%;
+            width: 28%;
+            z-index: 1;
+            overflow: hidden;
+            border-radius: 20px;
+
+            &.container-2 {
+                width: 20%;
+                top: auto;
+                bottom: 0%;
+                left: 4%;
+                right: auto;
+            }
+
+            .dm__services-media-ratio {
+                height: 0;
+                width: 100%;
+                padding-bottom: 140%;
+                overflow: hidden;
+            }
+
+            figure {
+                margin: 0;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 110%;
+                overflow: hidden;
+
+                image {
+                    object-fit: cover;
+                    object-position: center;
+                    min-width: 100%;
+                    min-height: 100%;
+                    display: block;
+                }
+            }
+        }
 
         .dm__home-services-header {
             text-align: right;
