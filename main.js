@@ -14,16 +14,17 @@ class Dinsmore {
     init() {
         console.log('Initializing Dinsmore...');
 
-        // this.scrollInit();
-        this.scrollWatch();
+        this.scrollInit();
+        // this.scrollWatch();
         this.navToggleHandler();
         this.offCanvasNavSubmenuToggle();
         this.offCanvasNavSubmenuBack();
         this.navDropdownHandler();
         this.navHeadroomHandler();
         this.homeHeroParallax();
-        this.homeServicesHandler();
+        // this.homeServicesHandler();
         this.homeServicesParallax();
+        this.portfolioParallax();
     }
 
 
@@ -594,53 +595,53 @@ class Dinsmore {
     }
 
 
-    homeServicesHandler() {
-        const _this = this;
-        const servicesSection = document.querySelector('#dm__home-services-container');
-        const serviceImages = document.querySelector('#dm__services-hover-container');
-        const services = document.querySelectorAll('.dm__service');
-        const img1 = document.querySelector('.dm__services-media');
-        const img2 = document.querySelector('.dm__services-media.container-2');
+    // homeServicesHandler() {
+    //     const _this = this;
+    //     const servicesSection = document.querySelector('#dm__home-services-container');
+    //     const serviceImages = document.querySelector('#dm__services-hover-container');
+    //     const services = document.querySelectorAll('.dm__service');
+    //     const img1 = document.querySelector('.dm__services-media');
+    //     const img2 = document.querySelector('.dm__services-media.container-2');
 
-        if (services.length < 1) return;
+    //     if (services.length < 1) return;
 
-        const callbackIn = (e) => {
-            gsap.to(serviceImages, {
-                opacity: 1,
-                duration: .4
-            });
-            gsap.to([img1, img2], {
-                opacity: .7,
-                filter: 'blur(5px)',
-                duration: .4
-            });
-        }
+    //     const callbackIn = (e) => {
+    //         gsap.to(serviceImages, {
+    //             opacity: 1,
+    //             duration: .4
+    //         });
+    //         // gsap.to([img1, img2], {
+    //         //     opacity: .7,
+    //         //     filter: 'blur(5px)',
+    //         //     duration: .4
+    //         // });
+    //     }
 
-        const callbackOut = (e) => {
-            gsap.to(serviceImages, {
-                opacity: 0,
-                duration: .4
-            });
-            gsap.to([img1, img2], {
-                opacity: 1,
-                filter: 'blur(0px)',
-                duration: .4
-            });
-        }
+    //     const callbackOut = (e) => {
+    //         gsap.to(serviceImages, {
+    //             opacity: 0,
+    //             duration: .4
+    //         });
+    //         // gsap.to([img1, img2], {
+    //         //     opacity: 1,
+    //         //     filter: 'blur(0px)',
+    //         //     duration: .4
+    //         // });
+    //     }
 
-        _this.eventHandler(servicesSection, 'mousemove', (e) => {
-            gsap.to(serviceImages, {
-                left: e.clientX,
-                top: e.clientY,
-                duration: .4
-            });
-        });
+    //     _this.eventHandler(servicesSection, 'mousemove', (e) => {
+    //         gsap.to(serviceImages, {
+    //             left: e.clientX,
+    //             top: e.clientY,
+    //             duration: .4
+    //         });
+    //     });
 
-        for (let service of services) {
-            _this.eventHandler(service, 'mouseover', callbackIn);
-            _this.eventHandler(service, 'mouseleave', callbackOut);
-        }
-    }
+    //     for (let service of services) {
+    //         _this.eventHandler(service, 'mouseover', callbackIn);
+    //         _this.eventHandler(service, 'mouseleave', callbackOut);
+    //     }
+    // }
 
     
     homeServicesParallax() {
@@ -650,7 +651,7 @@ class Dinsmore {
         const img2Inner = document.querySelector('.dm__services-media.container-2 figure');
 
         const animation1 = gsap.to(img1, {
-            translateY: '-10%',
+            translateY: '-12%',
             scrollTrigger: {
                 trigger: img1,
                 scrub: 1
@@ -666,7 +667,7 @@ class Dinsmore {
         });
 
         const animation2 = gsap.to(img2, {
-            translateY: '-16%',
+            translateY: '-20%',
             scrollTrigger: {
                 trigger: img2,
                 scrub: 1
@@ -674,12 +675,29 @@ class Dinsmore {
         });
 
         const animation2Inner = gsap.to(img2Inner, {
-            translateY: '-5%',
+            translateY: '-8%',
             scrollTrigger: {
                 trigger: img2,
                 scrub: 1
             }
         });
+    }
+
+
+    portfolioParallax() {
+        const portfilio = document.querySelectorAll('.dm__portfolio-piece');
+
+        if (portfilio.length < 1) return;
+
+        for (let piece of portfilio) {
+            gsap.to(piece.querySelector(':scope > img'), {
+                translateY: '-108px',
+                scrollTrigger: {
+                    scrub: 2,
+                    trigger: piece
+                }
+            })
+        }
     }
 }
 

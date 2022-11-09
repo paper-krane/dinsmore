@@ -17,7 +17,7 @@
             height: calc(100% + 400px);
             overflow: hidden;
     
-            img {
+            img, video {
                 object-fit: cover;
                 object-position: 50% 50%;
                 min-width: 100%;
@@ -34,7 +34,7 @@
                 width: 100%;
                 height: 40%;
                 background: transparent;
-                background: linear-gradient(180deg, rgba($deep-blue,.8) 0%, rgba(0,0,0,0) 100%);
+                background: linear-gradient(180deg, rgba($deep-blue,.5) 0%, rgba(0,0,0,0) 100%);
             }
     
             &:after {
@@ -44,7 +44,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: rgba($black, .4);
+                background-color: rgba($black, .2);
             }
         }
     }
