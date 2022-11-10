@@ -15,6 +15,12 @@
 </head>
 
 <body>
+	<style>
+		#dm__navbar-container.is-dark #dm__navbar #dm__nav a, 
+		#dm__navbar-container.is-dark #dm__navbar #dm__nav a:visited {
+			color: #031926;
+		}
+	</style>
 	<header id="dm__page-header">
 		<div id="dm__navbar-container" class="is-dark">
 			<div class="dm__container">
@@ -250,8 +256,8 @@
 	<div id="dm__page-container" asscroll-container>
 		<div id="dm__page">
 			<div id="dm__page-wrap">
-				<main id="dm__page-content-scroll" class="light">
-					<canvas id="scroll"></canvas>
+				<main id="dm__page-content-scroll" class="light" style="background-color: #bcbcbc;">
+					<canvas id="scroll" style="background-color: #bcbcbc;"></canvas>
 				</main>
 				<footer id="dm__page-footer">
 
@@ -264,7 +270,7 @@
     const html = document.documentElement;
     const canvas = document.querySelector('#scroll');
     const context = canvas.getContext('2d');
-    const frameCount = 120;
+    const frameCount = 240;
     const currentFrame = index => (`./assets/scene/${index.toString().padStart(4, '0')}.jpg`);
 
     const preloadImages = () => {
