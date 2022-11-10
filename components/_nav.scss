@@ -102,7 +102,7 @@
         
         svg {
             display: block;
-            height: 28px;
+            height: 32px;
 
             path, circle, rect {
                 transition: all 0.4s ease 0s;
@@ -215,7 +215,7 @@
     @media #{$m-and-up} {
         #dm__navbar-logo {
             svg {
-                height: 28px;
+                height: 36px;
     
                 .dm__logo-text {
                     display: block;
@@ -252,7 +252,7 @@
             margin-right: 0;
 
             svg {
-                height: 32px;
+                height: 42px;
             }
         }
 
@@ -413,7 +413,7 @@
     @media #{$xxl-and-up} {
         #dm__navbar-logo {
             svg {
-                height: 32px;
+                height: 42px;
             }
         }
     }

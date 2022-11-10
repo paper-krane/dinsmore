@@ -14,8 +14,8 @@ class Dinsmore {
     init() {
         console.log('Initializing Dinsmore...');
 
-        this.scrollInit();
-        // this.scrollWatch();
+        // this.scrollInit();
+        this.scrollWatch();
         this.navToggleHandler();
         this.offCanvasNavSubmenuToggle();
         this.offCanvasNavSubmenuBack();
